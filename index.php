@@ -18,7 +18,7 @@
 				</div>
 				<nav class="menu d-flex d-sm-block flex-wrap">
                     <a href="index.php"><i class="icon-doc-text"></i><span>Customers</span></a>
-					<a href="#"><i class="icon-doc-text"></i><span>Invoices</span></a>
+					<a href="views/invoices.view.php"><i class="icon-doc-text"></i><span>Invoices</span></a>
                     <div class="dropdown">
                        <a class="btn dropdown-toggle  text-left" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                        <i class="icon-home"></i>
@@ -67,7 +67,7 @@
                                        </div>
                                   </div>
                             </form>
-                            <button type="button" class="btn-outline-dark btn-lg btn-block">Register</button>
+                            <button type="button" class="btn-outline-dark btn-lg btn-block" onclick="AgregarCustomer()">Register</button>
                         </div>
                         <hr>
                         <button type="button" class="btn btn-outline-danger"><i class="fas fa-file-pdf">Exp PDF</i></button>
@@ -76,13 +76,13 @@
                         <table class="table table-hover table-responsive">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>Order No</th>
+                                    <th>Order</th>
                                     <th>Name</th>
                                     <th>Location</th>
                                     <th>RFC</th>
                                     <th>Carrier</th>
                                     <th>ProNo</th>
-                                    <th>Equipment No</th>
+                                    <th>Equipment</th>
                                 </tr>
                             </thead>
                             <tbody id="tabla"></tbody>
