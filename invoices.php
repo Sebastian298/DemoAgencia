@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:300,400,500" rel="stylesheet">
     <link rel="stylesheet" href="css/estilos.css">
     <script src="https://kit.fontawesome.com/8b850b0e85.js" crossorigin="anonymous"></script>
-    <title>Dashboard</title>
+    <title>Invoices</title>
 </head>
 <body>
 <div class="container-fluid">
@@ -19,7 +19,7 @@
 				<nav class="menu d-flex d-sm-block flex-wrap">
                     <a href="index.php"><i class="icon-doc-text"></i><span>Customers</span></a>
 					<a href="invoices.php"><i class="icon-doc-text"></i><span>Invoices</span></a>
-					<a href="freight.php"><i class="icon-doc-text"></i><span>Freight Load</span></a>
+                    <a href="freight.php"><i class="icon-doc-text"></i><span>Freight Load</span></a>
                     <a href="#"><i class="icon-logout"></i><span>Salir</span></a>
 				</nav>
 			</div>
@@ -27,38 +27,32 @@
 				<div class="row">
 					<div class="columna col-lg-7">
 						<div class="widget nueva_entrada">
-                            <h3 class="titulo">Customers</h3>
-                              <form>
-                                  <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                      <label for="Name">Name</label>
-                                      <input type="text" class="form-control" id="name" placeholder="Name">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                      <label for="Location">Location</label>
-                                      <input type="text" class="form-control" id="Location" placeholder="1234 Main St">
-                                    </div>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="RFC">RFC</label>
-                                    <input type="text" class="form-control" id="RFC" placeholder="RFC">
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="Carrier">Carrier</label>
-                                    <input type="text" class="form-control" id="Carrier" placeholder="Carrier">
-                                  </div>
-                                   <div class="form-row">
-                                       <div class="form-group col-md-6">
-                                         <label for="ProNo">ProNo</label>
-                                         <input type="text" class="form-control" id="ProNo">
-                                       </div>
-                                       <div class="form-group col-md-4">
-                                         <label for="Equipment">Equipment No</label>
-                                         <input type="text" class="form-control" id="Equipment">
-                                       </div>
-                                  </div>
+                            <h3 class="titulo">Invoices</h3>
+                            <form>
+                               <div class="form-row">
+                                 <div class="form-group col-md-6">
+                                   <label for="inputState">Num Customer</label>
+                                   <select id="num_customer" class="form-control">
+                                   </select>
+                                 </div>
+                               </div>
+                               <div class="form-group">
+                                   <label >Invoice Date</label>
+                                   <input type="date" name="bday" max="3000-12-31" 
+                                   min="1000-01-01" class="form-control" id="date">
+                               </div>
+                               <div class="form-row">
+                                 <div class="form-group col-md-4">
+                                   <label for="trafic">Traffic</label>
+                                   <input type="text" class="form-control" id="trafic">
+                                 </div>
+                                 <div class="form-group col-md-8">
+                                   <label for="description">Description</label>
+                                   <input type="text" class="form-control" id="description">
+                                 </div>
+                               </div>
                             </form>
-                            <button type="button" class="btn-outline-dark btn-lg btn-block" onclick="AgregarCustomer()">Register</button>
+                            <button type="button" class="btn-outline-dark btn-lg btn-block" onclick="RegistrarInvoice()">Register</button>
                         </div>
                         <hr>
                         <button type="button" class="btn btn-outline-danger"><i class="fas fa-file-pdf">Exp PDF</i></button>
@@ -67,13 +61,12 @@
                         <table class="table table-hover table-responsive">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>Order</th>
-                                    <th>Name</th>
-                                    <th>Location</th>
-                                    <th>RFC</th>
-                                    <th>Carrier</th>
-                                    <th>ProNo</th>
-                                    <th>Equipment</th>
+                                    <th>Num Invoice</th>
+                                    <th>Num Customer</th>
+                                    <th>Invoice Date</th>
+                                    <th>Traffic</th>
+                                    <th>Description</th>
+                                    <th>Created by</th>
                                 </tr>
                             </thead>
                             <tbody id="tabla"></tbody>
@@ -157,7 +150,7 @@
 									<div class="botones d-flex justify-content-start flex-wrap w-100">
 										<button class="aprobar"><i class="icono icon-ok"></i>Approve</button>
 										<button class="eliminar"><i class="icono icon-cancel"></i>Remove</button>
-										<button class="bloquear"><i class="icono icon-flag"></i>Block User</button>
+										<button class="bloquear"><i class="icono icon-flag"></i>Block user</button>
 									</div>
 								</div>				
 							</div>
@@ -166,11 +159,8 @@
 				</div>
 			</main>
 		</div>
-	</div>
-
-
-
-    <script src="js/customer.js"></script>
+    </div>
+    <script src="js/invoices.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>

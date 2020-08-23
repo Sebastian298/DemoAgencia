@@ -13,9 +13,9 @@
 			'Name' 	=> $fila['Name'],
 			'Location' => $fila['Location'],
 			'RFC'		=> $fila['RFC'],
-            'Carrier'		=> $fila['Carrier'],
-            'Pro_No'		=> $fila['Pro_No'],
-            'Equipment_No'		=> $fila['Equipment_No']
+      'Carrier'		=> $fila['Carrier'],
+      'Pro_No'		=> $fila['Pro_No'],
+      'Equipment_No'		=> $fila['Equipment_No']
 		];
 		array_push($respuesta, $customer);
     }

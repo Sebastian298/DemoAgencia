@@ -13,9 +13,9 @@ $query = "INSERT INTO Customer(Name,Location,RFC,Carrier,Pro_No,Equipment_No)VAL
 $exec = sqlsrv_query($conn,$query);
 
 if($exec){
-  echo 'sjdjsj';
+  echo 'Insertado';
 }
 else{
-    echo 'error';
+    echo 'Error';
 }
 ?>

@@ -6,7 +6,7 @@ function MostrarDatos(){
 	peticion.open('GET', 'MostrarCustomers.php');
 
 	peticion.onload = function(){
-		var datos = JSON.parse(peticion.responseText);
+		let datos = JSON.parse(peticion.responseText);
 		tabla.innerHTML='';
 		if(datos.error){
 			error_box.classList.add('active');
