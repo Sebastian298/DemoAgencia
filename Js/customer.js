@@ -1,4 +1,5 @@
 
+console.log('funciona');
 function onKeyDownHandler(event) {
     let codigo = event.which || event.keyCode;
     let value = document.getElementById('buscar').value;

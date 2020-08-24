@@ -2,6 +2,8 @@
     function Consulta(){
        include 'connection.php';
 
+       $var;
+
        $variable = $_POST['parametro'];
    
        if(empty($variable)){

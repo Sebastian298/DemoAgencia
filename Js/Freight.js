@@ -82,7 +82,7 @@ function MostrarDatos(bandera,valor){
 		}
 	}
 }
-
+console.log('funciona');
 function RegistrarFreight(){
     let numCustomer = parseInt(document.getElementById('num_customer').value,10),
         numInvoice = parseInt(document.getElementById('num_invoice').value,10),

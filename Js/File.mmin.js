@@ -1,4 +1,4 @@
-/*! FileSaver.js v1.3.6
+/*! FileSaver.js v1.3.
  *
  * A saveAs() FileSaver implementation.
  *

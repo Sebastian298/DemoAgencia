@@ -1,4 +1,5 @@
 <?php
+   $variable;
    include 'connection.php';
    
      $query = "SELECT * FROM Customer";

@@ -1,7 +1,7 @@
 <?php
 
 include 'connection.php';
-
+$variable;
 $numCustomer = $_POST['numCustomer'];
 $trafic = $_POST['trafic'];
 $invoiceDate = $_POST['invoiceDate'];

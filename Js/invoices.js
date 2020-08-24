@@ -48,7 +48,7 @@ function onKeyDownHandler(event) {
         }
     }
 }
-
+console.log('funciona');
 function CargarElementos(){
 
     let peticion = new XMLHttpRequest();

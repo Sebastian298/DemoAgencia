@@ -2,6 +2,7 @@
 
 include 'connection.php';
 
+$variable;
 $Name = $_POST['Name'];
 $Location = $_POST['Location'];
 $RFC = $_POST['RFC'];

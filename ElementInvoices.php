@@ -1,6 +1,7 @@
 <?php
    include 'connection.php';
    
+     $variable;
      $query = "SELECT * FROM INVOICE";
    
    $consulta =  sqlsrv_query($conn,$query);

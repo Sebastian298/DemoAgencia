@@ -106,7 +106,7 @@
                             <tbody id="tabla"></tbody>
                         </table>
 					</div>  
-					<div class="columna col-lg-5">
+					<div class="columna col-lg-4">
 						<div class="widget estadisticas">
 							<h3 class="titulo">Statistics</h3>
 							<div class="contenedor d-flex flex-wrap">
