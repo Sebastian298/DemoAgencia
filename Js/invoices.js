@@ -43,7 +43,6 @@ function CargarElementos(){
 }
 
 function RegistrarInvoice(){
-
     let numCustomer = parseInt(document.getElementById('num_customer').value,10),
         traffic = parseInt(document.getElementById('trafic').value,10),
         description = document.getElementById('description').value,

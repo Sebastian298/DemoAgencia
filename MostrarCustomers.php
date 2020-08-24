@@ -1,6 +1,5 @@
 <?php
    include 'connection.php';
-
    $query = "SELECT * FROM Customer";
 
    $consulta =  sqlsrv_query($conn,$query);

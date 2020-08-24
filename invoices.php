@@ -58,7 +58,7 @@
                         <button type="button" class="btn btn-outline-danger"><i class="fas fa-file-pdf">Exp PDF</i></button>
                         <button type="button" class="btn btn-outline-success"><i class="far fa-file-excel"></i>Exp Xlsx</i></button>
                         <hr>
-                        <table class="table table-hover table-responsive">
+                        <table class="table table-hover table-responsive text-info">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Num Invoice</th>
