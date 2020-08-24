@@ -1,11 +1,4 @@
 
-// document.getElementById("buscar").addEventListener("keypress", myFunction);
-
-// function myFunction() {
-//   let valor = document.getElementById('buscar').value;
-//   MostrarDatos(true,valor);
-// }
-
 function onKeyDownHandler(event) {
     let codigo = event.which || event.keyCode;
     let value = document.getElementById('buscar').value;
@@ -91,5 +84,48 @@ function AgregarCustomer(){
 	}
 
 
+}
+
+function Generar(){
+    let data = [];
+    let parametros;
+    let peticion = new XMLHttpRequest();
+
+    peticion.open('POST', 'MostrarCustomers.php');
+
+    parametros = 'parametro';
+    
+    peticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    peticion.send(parametros);
+    peticion.onload=function(){
+               let datos = JSON.parse(peticion.responseText);
+        
+               for (let index = 0; index < datos.length; index++) {
+                   data.push([`${datos[index].Id}`,`${datos[index].Name}`,`${datos[index].Location}`
+                   ,`${datos[index].RFC}`,`${datos[index].Carrier}`,`${datos[index].Pro_No}`,`${datos[index].Equipment_No}`]);
+           };
+           let fecha = new Date();
+    
+           let pdf = new jsPDF();
+           let columns = ["Id", "Name", "Location","RFC","Carrier","Pro_No","Equipment_No"];
+           pdf.text(20,20,"Customers Report");
+           pdf.autoTable(columns,data,
+               { margin:{ top: 25  }}
+             );
+             pdf.save('Reporte del'+' '+fecha.getDate() + "/" + (fecha.getMonth() +1) + "/" + fecha.getFullYear()+'.pdf');
+    }
+}
+
+function Excel(){
+    let tabla = document.querySelector("#tables");
+
+    let tableExport = new TableExport(tabla, {
+        exportButtons: false, // No queremos botones
+        filename: "Customers Report", //Nombre del archivo de Excel
+        sheetname: "Customers Report", //Título de la hoja
+    });
+    let datos = tableExport.getExportData();
+    let preferenciasDocumento = datos.tables.xlsx;
+    tableExport.export2file(preferenciasDocumento.data, preferenciasDocumento.mimeType, preferenciasDocumento.filename, preferenciasDocumento.fileExtension, preferenciasDocumento.merges, preferenciasDocumento.RTL, preferenciasDocumento.sheetname);
 }
 MostrarDatos(false,'sss');

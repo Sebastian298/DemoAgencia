@@ -88,5 +88,50 @@ function RegistrarInvoice(){
 		}
 	}
 }
+
+function Generar(){
+    let data = [];
+    let parametros;
+    let peticion = new XMLHttpRequest();
+
+    peticion.open('POST', 'MostrarInvoices.php');
+
+    parametros = 'parametro';
+    
+    peticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    peticion.send(parametros);
+    peticion.onload=function(){
+               let datos = JSON.parse(peticion.responseText);
+        
+               for (let index = 0; index < datos.length; index++) {
+                   data.push([`${datos[index].Num_Invoice}`,`${datos[index].Num_Customer}`,`${datos[index].Invoice_Date}`,
+                   `${datos[index].Traffic}`,`${datos[index].Description}`,`${datos[index].Created_By}`]);
+                };
+           let fecha = new Date();
+    
+           let pdf = new jsPDF();
+           let columns = ["Num Invoice", "Num Customer", "Invoice Date","Trafic","Description","Created By"];
+           pdf.text(20,20,"Invoices Report");
+           pdf.autoTable(columns,data,
+               { margin:{ top: 25  }}
+             );
+             pdf.save('Reporte del'+' '+fecha.getDate() + "/" + (fecha.getMonth() +1) + "/" + fecha.getFullYear()+'.pdf');
+    }
+}
+
+function Excel(){
+    let tabla = document.querySelector("#tables");
+
+    let tableExport = new TableExport(tabla, {
+        exportButtons: false, // No queremos botones
+        filename: "Invoices Report", //Nombre del archivo de Excel
+        sheetname: "Invoices Report", //Título de la hoja
+    });
+    let datos = tableExport.getExportData();
+    let preferenciasDocumento = datos.tables.xlsx;
+    tableExport.export2file(preferenciasDocumento.data, preferenciasDocumento.mimeType, preferenciasDocumento.filename, preferenciasDocumento.fileExtension, preferenciasDocumento.merges, preferenciasDocumento.RTL, preferenciasDocumento.sheetname);
+}
+
+
 CargarElementos();
 MostrarDatos(false,'ddd');

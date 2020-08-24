@@ -113,5 +113,48 @@ function RegistrarFreight(){
 	}
 }
 
+function Generar(){
+    let data = [];
+    let parametros;
+    let peticion = new XMLHttpRequest();
+
+    peticion.open('POST', 'MostrarFreight.php');
+
+    parametros = 'parametro';
+    
+    peticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    peticion.send(parametros);
+    peticion.onload=function(){
+               let datos = JSON.parse(peticion.responseText);
+        
+               for (let index = 0; index < datos.length; index++) {
+                   data.push([`${datos[index].Num_Order}`,`${datos[index].Num_Customer}`,`${datos[index].Id_Invoice}`
+                   ,`${datos[index].Num_Traffic}`,`${datos[index].Shipper}`,`${datos[index].Pick_Date}`,`${datos[index].Consigne}`,
+                   `${datos[index].Delivery_Date}`,`${datos[index].Request_Date}`,`${datos[index].Created_at}`]);
+           };
+           let fecha = new Date();
+    
+           let pdf = new jsPDF();
+           let columns = ["Num Order", "Num Customer", "Id Invoice","Num Trafic","Shipper","Pick Date","Consigne","Delivery Date","Request Date","Created At"];
+           pdf.text(20,20,"Freight Load Report");
+           pdf.autoTable(columns,data,
+               { margin:{ top: 30  }});
+           pdf.save('Reporte del'+' '+fecha.getDate() + "/" + (fecha.getMonth() +1) + "/" + fecha.getFullYear()+'.pdf');
+    }
+}
+
+function Excel(){
+    let tabla = document.querySelector("#tables");
+
+    let tableExport = new TableExport(tabla, {
+        exportButtons: false, // No queremos botones
+        filename: "Freight Load Report", //Nombre del archivo de Excel
+        sheetname: "Freight Load Report", //Título de la hoja
+    });
+    let datos = tableExport.getExportData();
+    let preferenciasDocumento = datos.tables.xlsx;
+    tableExport.export2file(preferenciasDocumento.data, preferenciasDocumento.mimeType, preferenciasDocumento.filename, preferenciasDocumento.fileExtension, preferenciasDocumento.merges, preferenciasDocumento.RTL, preferenciasDocumento.sheetname);
+}
+
 CargarElementos();
 MostrarDatos(false,'ss');

@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:300,400,500" rel="stylesheet">
     <link rel="stylesheet" href="css/estilos.css">
+	<script src="js/jspdf.min.js"></script>
+	<script src="js/File.mmin.js"></script>
+	<script src="js/file.js"></script>
+	<script src="js/table.js"></script>
+    <script src="js/jspdf.plugin.autotable.min.js"></script>
     <script src="https://kit.fontawesome.com/8b850b0e85.js" crossorigin="anonymous"></script>
     <title>Freight Load</title>
 </head>
@@ -77,12 +82,12 @@
                             <button type="button" class="btn-outline-dark btn-lg btn-block" onclick="RegistrarFreight()">Register</button>
                         </div>
                         <hr>
-                        <button type="button" class="btn btn-outline-danger"><i class="fas fa-file-pdf">Exp PDF</i></button>
-                        <button type="button" class="btn btn-outline-success"><i class="far fa-file-excel"></i>Exp Xlsx</i></button>
+                        <button type="button" class="btn btn-outline-danger" onclick="Generar()"><i class="fas fa-file-pdf">Exp PDF</i></button>
+                        <button type="button" class="btn btn-outline-success" onclick="Excel()"><i class="far fa-file-excel"></i>Exp Xlsx</i></button>
                         <hr>
 						<input type="text" class="form-control col-4" id="buscar" placeholder="search"onkeydown="onKeyDownHandler(event)">
 						<hr>
-                        <table class="table table-hover table-responsive text-info">
+                        <table class="table table-hover table-responsive text-info" id="tables">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Num Order</th>
