@@ -24,7 +24,7 @@
 				<nav class="menu d-flex d-sm-block flex-wrap">
                     <a href="index.php"><i class="icon-doc-text"></i><span>Customers</span></a>
 					<a href="invoices.php"><i class="icon-doc-text"></i><span>Invoices</span></a>
-					<a href="freight.php"><i class="icon-doc-text"></i><span>Freight Load</span></a>
+					<a href="Freight.php"><i class="icon-doc-text"></i><span>Freight Load</span></a>
                     <a href="#"><i class="icon-logout"></i><span>Salir</span></a>
 				</nav>
 			</div>
