@@ -1,7 +1,7 @@
 function CargarElementos(){
     let datos;
     let peticion = new XMLHttpRequest();
-    peticion.open('GET', 'MostrarInvoices.php');
+    peticion.open('GET', 'ElementInvoices.php');
     peticion.onload = function(){
 	    datos = JSON.parse(peticion.responseText);
         
@@ -19,7 +19,7 @@ function CargarElementos(){
 
     let data;
     let peticion2 = new XMLHttpRequest();
-    peticion2.open('GET', 'MostrarCustomers.php');
+    peticion2.open('GET', 'ElementCustomer.php');
     peticion2.onload = function(){
 	    data = JSON.parse(peticion2.responseText);
         for(var i = 0; i < data.length; i++){
@@ -32,9 +32,33 @@ function CargarElementos(){
     peticion2.send();
 }
 
-function MostrarDatos(){
+function onKeyDownHandler(event) {
+    let codigo = event.which || event.keyCode;
+    let value = document.getElementById('buscar').value;
+    MostrarDatos(true,value);
+    if (codigo == 8) {
+        if (value.length < 1) {
+            MostrarDatos(false,'sss');
+        }else{
+            MostrarDatos(true,value);
+        }
+    }
+}
+function MostrarDatos(bandera,valor){
+    let like;
+    let parametros;
     let peticion = new XMLHttpRequest();
-	peticion.open('GET', 'MostrarFreight.php');
+
+    peticion.open('POST', 'MostrarFreight.php');
+
+    if(bandera == true){
+        like = valor;
+        parametros = 'parametro='+like;
+    }else{
+        parametros = 'parametro';
+    }
+    peticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    peticion.send(parametros);
 
 	peticion.onload = function(){
 		let datos = JSON.parse(peticion.responseText);
@@ -57,8 +81,6 @@ function MostrarDatos(){
           `
 		}
 	}
-
-	peticion.send();
 }
 
 function RegistrarFreight(){
@@ -86,9 +108,10 @@ function RegistrarFreight(){
 	    if(peticion.readyState == 4 && peticion.status == 200){
 		   document.getElementById('consigne').value='';
 		   document.getElementById('shipper').value='';
-           MostrarDatos();
+           MostrarDatos(false,'ss');
 		}
 	}
 }
+
 CargarElementos();
-MostrarDatos();
+MostrarDatos(false,'ss');

@@ -1,10 +1,43 @@
-function MostrarDatos(){
+
+// document.getElementById("buscar").addEventListener("keypress", myFunction);
+
+// function myFunction() {
+//   let valor = document.getElementById('buscar').value;
+//   MostrarDatos(true,valor);
+// }
+
+function onKeyDownHandler(event) {
+    let codigo = event.which || event.keyCode;
+    let value = document.getElementById('buscar').value;
+    MostrarDatos(true,value);
+    if (codigo == 8) {
+        if (value.length < 1) {
+            MostrarDatos(false,'sss');
+        }else{
+            MostrarDatos(true,value);
+        }
+    }
+}
+
+function MostrarDatos(bandera,valor){
     tabla.innerHTML = 
     '<tr><th>Order</th><th>Name</th><th>Location</th><th>RFC</th><th>Carrier</th><th>ProNo</th><th>Equipment</th></tr>';
 
-	let peticion = new XMLHttpRequest();
-	peticion.open('GET', 'MostrarCustomers.php');
+    let like;
+    let parametros;
+    let peticion = new XMLHttpRequest();
 
+    peticion.open('POST', 'MostrarCustomers.php');
+
+    if(bandera == true){
+        like = valor;
+        parametros = 'parametro='+like;
+    }else{
+        parametros = 'parametro';
+    }
+    peticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    peticion.send(parametros);
+    
 	peticion.onload = function(){
 		let datos = JSON.parse(peticion.responseText);
 		tabla.innerHTML='';
@@ -26,9 +59,8 @@ function MostrarDatos(){
 		 }
 		}
 		
-	}
-
-	peticion.send();
+    }
+    
 }
 
 function AgregarCustomer(){
@@ -42,7 +74,7 @@ function AgregarCustomer(){
     let peticion = new XMLHttpRequest();
     peticion.open('POST','AgregarCustomer.php');
     let parametros = 'Name='+ Name + '&Location='+ Location +'&RFC='+ RFC+'&Carrier='+Carrier + '&Pro_No=' + Pro_No + '&Equipment='+Equipment;
-
+    
     peticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     peticion.send(parametros);
 
@@ -54,10 +86,10 @@ function AgregarCustomer(){
            document.getElementById('Carrier').value='';
            document.getElementById('ProNo').value='';
            document.getElementById('Equipment').value='';
-           MostrarDatos();
+           MostrarDatos(false,'dsds');
 		}
 	}
 
 
 }
-MostrarDatos();
+MostrarDatos(false,'sss');

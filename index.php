@@ -68,7 +68,7 @@
 						   </div>
 						</div>
                         <hr>
-						<input type="text" class="form-control col-4" id="buscar" placeholder="search">
+						<input type="text" class="form-control col-4" id="buscar" placeholder="search"onkeydown="onKeyDownHandler(event)">
 						<hr>
                         <table class="table table-hover table-responsive text-info">
                             <thead class="thead-dark">

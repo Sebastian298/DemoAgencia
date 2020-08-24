@@ -1,9 +1,21 @@
-function MostrarDatos(){
+function MostrarDatos(bandera,valor){
     tabla.innerHTML = 
     '<tr><th>Order</th><th>Num Invoice</th><th>Num Customer</th><th>Invoice Date</th><th>Traffic</th><th>Description</th><th>Created By</th></tr>';
 
-	let peticion = new XMLHttpRequest();
-	peticion.open('GET', 'MostrarInvoices.php');
+	let like;
+    let parametros;
+    let peticion = new XMLHttpRequest();
+
+    peticion.open('POST', 'MostrarInvoices.php');
+
+    if(bandera == true){
+        like = valor;
+        parametros = 'parametro='+like;
+    }else{
+        parametros = 'parametro';
+    }
+    peticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    peticion.send(parametros);
 
 	peticion.onload = function(){
 		let datos = JSON.parse(peticion.responseText);
@@ -22,16 +34,30 @@ function MostrarDatos(){
 		}
 	}
 
-	peticion.send();
+}
+
+function onKeyDownHandler(event) {
+    let codigo = event.which || event.keyCode;
+    let value = document.getElementById('buscar').value;
+    MostrarDatos(true,value);
+    if (codigo == 8) {
+        if (value.length < 1) {
+            MostrarDatos(false,'sss');
+        }else{
+            MostrarDatos(true,value);
+        }
+    }
 }
 
 function CargarElementos(){
-    let datos;
+
     let peticion = new XMLHttpRequest();
-    peticion.open('GET', 'MostrarCustomers.php');
+
+    peticion.open('GET','ElementCustomer.php');
+
+    peticion.send();
     peticion.onload = function(){
 	    datos = JSON.parse(peticion.responseText);
-        
         for(var i = 0; i < datos.length; i++){
 		  num_customer.innerHTML +=  ` 
           <option>${datos[i].Id}</option>
@@ -39,7 +65,6 @@ function CargarElementos(){
         }         
         
     }
-    peticion.send();
 }
 
 function RegistrarInvoice(){
@@ -59,9 +84,9 @@ function RegistrarInvoice(){
 	    if(peticion.readyState == 4 && peticion.status == 200){
 		   document.getElementById('trafic').value='';
 		   document.getElementById('description').value='';
-           MostrarDatos();
+           MostrarDatos(false,'ddd');
 		}
 	}
 }
 CargarElementos();
-MostrarDatos();
+MostrarDatos(false,'ddd');
